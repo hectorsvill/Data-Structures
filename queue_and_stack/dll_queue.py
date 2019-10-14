@@ -20,9 +20,9 @@ class Queue:
     """Add item to the end of the queue
     """
     def enqueue(self, value):
-        # add link to the back
+        # add node to the back
         self.storage.add_to_head(value)
-        # link added
+        # node added
         self.size += 1
 
     def dequeue(self):
@@ -34,11 +34,14 @@ class Queue:
 
     """ iterate through list and print """
     def print_queue(self):
-        current = self.storage.head
+        
+        head = self.storage.head
         print(f"size: {self.size}")
-        while current:
-            print(current.value, end= ", ")
-            current = current.next
+        
+        while head:
+            print(head.value, end= ", ")
+            #set curremt node to next node
+            head = head.next
         print("")
 
 if __name__ == "__main__":
