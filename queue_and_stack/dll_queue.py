@@ -35,6 +35,7 @@ class Queue:
     """ iterate through list and print """
     def print_queue(self):
         current = self.storage.head
+        print(f"size: {self.size}")
         while current:
             print(current.value, end= ", ")
             current = current.next
