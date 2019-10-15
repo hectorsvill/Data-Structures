@@ -30,9 +30,12 @@ class Queue:
         # check of tail exist
 
         if self.storage.tail != None:
-            # node removed
-            self.storage.remove_from_tail()
+            # Get node value and return 
+            value = self.storage.remove_from_tail()
             self.size -= 1
+            return value
+        else:
+            return None
 
     def len(self):
         return self.size
