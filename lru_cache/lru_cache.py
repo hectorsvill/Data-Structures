@@ -53,10 +53,13 @@ class LRUCache:
 
         try:
             value = self.storage[key]
-            print(value)
+            # print(value)
             return value
         except KeyError:
             print("empty")
+            return None
+
+                
     """
     Adds the given key-value pair to the cache. The newly-
     added pair should be considered the most-recently used
@@ -68,27 +71,45 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        print(self.cache.length)
-        #check if it exist
 
+
+
+        self.storage[key] = value
+
+
+        """
+        # check if it exist
+        
+        #
         # check if chache is 1 less then limit
-        if self.cache.length < self.limit - 1:
+        # if self.cache.length < self.limit:
             # add to cache
             # update lru 
             self.storage[key] = value
-        else:
+            # self.cache.add_to_tail(key)
+        # else:
             # at limit remove top
             # update lru
-            print("remove top")
+            # print("remove top")
 
-
-
+        # print(self.cache.length)
+    """
 
 
 if __name__ == "__main__":
-    lru = LRUCache(limit=4)
-    lru.set("zero", 0)
-    print(lru.storage)
+    lru = LRUCache(limit=3)
+    
+    lru.set('item1', 'a')
+    lru.set('item2', 'b')
+    lru.set('item3', 'c')
 
+    x = lru.get('item11')
+    print(x)
+    print(lru.storage)
+    lru.set('item2', 'z')
+
+    print(lru.storage)
+    
+    
 
 
