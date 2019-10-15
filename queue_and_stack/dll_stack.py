@@ -31,10 +31,28 @@ class Stack:
         self.storage = DoublyLinkedList()
 
     def push(self, value):
-        pass
+        self.storage.add_to_tail(value)
+        self.size += 1
 
     def pop(self):
-        pass
+        self.size -= 1
+        return self.storage.remove_from_head()
 
     def len(self):
-        pass
+        return self.size
+
+
+    def print_stack(self):
+        head = self.storage.head
+        while head:
+            print(f"{head.value}", end=", ")
+            head = head.next
+
+
+
+if __name__ == "__main__":
+    s = Stack()
+    s.push(1)
+    s.pop()
+    s.push(2)
+    s.print_stack()
