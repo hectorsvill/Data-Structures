@@ -35,8 +35,11 @@ class Stack:
         self.size += 1
 
     def pop(self):
-        self.size -= 1
-        return self.storage.remove_from_head()
+        if self.storage.head == None and self.storage.tail == None:
+            return None
+        else:
+            self.size -= 1
+            return self.storage.remove_from_tail()
 
     def len(self):
         return self.size
@@ -52,7 +55,12 @@ class Stack:
 
 if __name__ == "__main__":
     s = Stack()
-    s.push(1)
     s.pop()
-    s.push(2)
-    s.print_stack()
+
+    print(s.len())
+
+
+    # s.push(1)
+    # s.push(2)
+    # print(s.pop())
+    # s.print_stack()
