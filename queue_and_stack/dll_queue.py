@@ -26,18 +26,20 @@ class Queue:
         self.size += 1
 
     def dequeue(self):
-        # link removed
-        self.size -= 1
+        self.storage.remove_from_tail()
+        # node removed
+        if not self.storage.head and not self.storage.tail:
+            return 
+        else:
+            self.size -= 1
 
     def len(self):
         return self.size
 
     """ iterate through list and print """
     def print_queue(self):
-        
         head = self.storage.head
         print(f"size: {self.size}")
-        
         while head:
             print(head.value, end= ", ")
             #set curremt node to next node
@@ -51,4 +53,5 @@ if __name__ == "__main__":
     q.enqueue(2)
 
     q.print_queue()
-
+    q.dequeue()
+    q.print_queue()
