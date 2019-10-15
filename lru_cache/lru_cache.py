@@ -1,3 +1,34 @@
+import sys
+sys.path.append('../doubly_linked_list')
+from doubly_linked_list import DoublyLinkedList
+
+
+""" LRU
+Least Recently Used 
+
+LRU, limit=4-> [0][1][2]
+
+get 1          bottom       top 
+LRU, limit=4-> [0][2] [1]
+
+set 3
+LRU, limit=4-> [0][2][1][3]
+
+get 0
+-get zero and move zero to top
+LRU, limit=4-> [2][1][3][0]
+
+set 4
+remove 0 and set 4
+LRU, limit=4-> [2][1][3][4]
+
+"""
+""" LRU Cache
+
+"""
+
+
+
 class LRUCache:
     """
     Our LRUCache class keeps track of the max number of nodes it
@@ -7,7 +38,8 @@ class LRUCache:
     to every node stored in the cache.
     """
     def __init__(self, limit=10):
-        pass
+        self.limit = limit
+        self.storage = {}
 
     """
     Retrieves the value associated with the given key. Also
@@ -17,8 +49,13 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        pass
 
+        try:
+            value = self.storage[key]
+            print(value)
+            return value
+        except KeyError:
+            print("empty")
     """
     Adds the given key-value pair to the cache. The newly-
     added pair should be considered the most-recently used
@@ -31,3 +68,9 @@ class LRUCache:
     """
     def set(self, key, value):
         pass
+if __name__ == "__main__":
+    lru = LRUCache()
+    lru.get(1)
+
+
+
