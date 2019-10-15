@@ -68,10 +68,27 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        pass
+        print(self.cache.length)
+        #check if it exist
+
+        # check if chache is 1 less then limit
+        if self.cache.length < self.limit - 1:
+            # add to cache
+            # update lru 
+            self.storage[key] = value
+        else:
+            # at limit remove top
+            # update lru
+            print("remove top")
+
+
+
+
+
 if __name__ == "__main__":
-    lru = LRUCache()
-    lru.get(1)
+    lru = LRUCache(limit=4)
+    lru.set("zero", 0)
+    print(lru.storage)
 
 
 
