@@ -26,11 +26,12 @@ class Queue:
         self.size += 1
 
     def dequeue(self):
-        self.storage.remove_from_tail()
-        # node removed
-        if not self.storage.head and not self.storage.tail:
-            return 
-        else:
+        
+        # check of tail exist
+
+        if self.storage.tail != None:
+            # node removed
+            self.storage.remove_from_tail()
             self.size -= 1
 
     def len(self):
@@ -48,10 +49,11 @@ class Queue:
 
 if __name__ == "__main__":
     q = Queue()
-    q.enqueue(0)
-    q.enqueue(1)
-    q.enqueue(2)
-
-    q.print_queue()
     q.dequeue()
-    q.print_queue()
+    print(q.len())
+    # q.enqueue(1)
+    # q.enqueue(2)
+
+    # q.print_queue()
+    # q.dequeue()
+    # q.print_queue()
