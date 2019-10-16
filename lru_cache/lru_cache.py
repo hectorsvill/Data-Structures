@@ -4,11 +4,11 @@ from doubly_linked_list import DoublyLinkedList
 
 
 """ LRU
-Least Recently Used 
+Least Recently Used
 
 LRU, limit=4-> [0][1][2]
 
-get 1          bottom       top 
+get 1          bottom       top
 LRU, limit=4-> [0][2] [1]
 
 set 3
@@ -39,8 +39,10 @@ class LRUCache:
     """
     def __init__(self, limit=10):
         self.limit = limit
-        self.cache = DoublyLinkedList()
-        self.storage = {}
+        self.size = 0
+        self.order = DoublyLinkedList()
+        self.storage = dict()
+
 
     """
     Retrieves the value associated with the given key. Also
@@ -50,16 +52,14 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-
-        try:
-            value = self.storage[key]
-            # print(value)
-            return value
-        except KeyError:
-            print("empty")
+        if key in self.storage:
+            node = self.storage[key]
+            self.order.move_to_end(node)
+            return node.value[1]
+        else:
             return None
 
-                
+
     """
     Adds the given key-value pair to the cache. The newly-
     added pair should be considered the most-recently used
@@ -71,45 +71,34 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
+        if key in self.storage:
+            node = self.storage[key]
+            node.value = (key, value)
+            self.order.move_to_end(node)
+            return
 
 
+        if self.size == self.limit:
+            del self.storage[self.order.remove_from_head()[0]]
+            self.size -= 1
 
-        self.storage[key] = value
+        self.order.add_to_tail((key, value))
+        self.storage[key] = self.order.tail
+        self.size += 1
 
-
-        """
-        # check if it exist
-        
-        #
-        # check if chache is 1 less then limit
-        # if self.cache.length < self.limit:
-            # add to cache
-            # update lru 
-            self.storage[key] = value
-            # self.cache.add_to_tail(key)
-        # else:
-            # at limit remove top
-            # update lru
-            # print("remove top")
-
-        # print(self.cache.length)
-    """
 
 
 if __name__ == "__main__":
     lru = LRUCache(limit=3)
-    
-    lru.set('item1', 'a')
-    lru.set('item2', 'b')
-    lru.set('item3', 'c')
-
-    x = lru.get('item11')
-    print(x)
-    print(lru.storage)
-    lru.set('item2', 'z')
-
-    print(lru.storage)
-    
-    
-
-
+    # 
+    # lru.set('item1', 'a')
+    # lru.set('item2', 'b')
+    # lru.set('item3', 'c')
+    #
+    # x = lru.get('item11')
+    # print(x)
+    # print(lru.storage)
+    # lru.set('item2', 'z')
+    #
+    # print(lru.storage)
+    #
