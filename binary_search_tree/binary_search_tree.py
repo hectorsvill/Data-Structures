@@ -86,7 +86,18 @@ class BinarySearchTree:
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        bst = self
+        while bst:
+            if bst.left:
+                print(bst.left.value)
+                bst = bst.left
+            if bst.right:
+                print(bst.right.value)
+                bst = bst.right
+
+            
+
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
@@ -109,7 +120,7 @@ class BinarySearchTree:
     
 
 def print_this(value):
-    print(value)
+    print(value, end=" ")
 
 if __name__ == "__main__":
     bst = BinarySearchTree(5)
@@ -119,5 +130,17 @@ if __name__ == "__main__":
     bst.insert(10)
     bst.insert(8)
     bst.insert(9)
-    bst.get_max()
-    bst.for_each(print_this)
+    bst.insert(1)
+    # bst.get_max()
+    # bst.for_each(print_this)
+    # bst.dft_print(bst)
+
+    print(bst.value)
+
+
+
+
+
+    """"
+
+    """
