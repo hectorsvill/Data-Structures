@@ -27,7 +27,7 @@ class BinarySearchTree:
 
 
 
-    # Return True if the tree contains the value
+    # Return True if the tree contains the value-
     # False if it does not
     def contains(self, target):
         if self.value == target:
@@ -47,9 +47,12 @@ class BinarySearchTree:
 
     # Return the maximum value found in the tree
     def get_max(self):
+        print(self.value)
         if not self.right:
             return self.value
         return self.right.get_max()
+
+
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
@@ -59,6 +62,19 @@ class BinarySearchTree:
             self.left.for_each(cb)
         if self.right:
             self.right.for_each(cb)
+
+        # stack = []
+        # stack.append(self)
+        # while len(stack):
+        #     current_node = stack.pop()
+        #     if current_node.right:
+        #         stack.append(current_node.right)
+        #     if current_node.left:
+        #         stack.append(current_node.left)
+        #     cb(current_node.value)
+
+
+
 
     # DAY 2 Project -----------------------
 
@@ -87,3 +103,21 @@ class BinarySearchTree:
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
+
+    def callthis(self):
+        print(self.value)
+    
+
+def print_this(value):
+    print(value)
+
+if __name__ == "__main__":
+    bst = BinarySearchTree(5)
+    bst.insert(4)
+    bst.insert(3)
+
+    bst.insert(10)
+    bst.insert(8)
+    bst.insert(9)
+    bst.get_max()
+    bst.for_each(print_this)
