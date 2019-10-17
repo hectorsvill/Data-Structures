@@ -1,3 +1,34 @@
+import sys
+sys.path.append('../doubly_linked_list')
+from doubly_linked_list import DoublyLinkedList
+
+
+""" LRU
+Least Recently Used
+
+LRU, limit=4-> [0][1][2]
+
+get 1          bottom       top
+LRU, limit=4-> [0][2] [1]
+
+set 3
+LRU, limit=4-> [0][2][1][3]
+
+get 0
+-get zero and move zero to top
+LRU, limit=4-> [2][1][3][0]
+
+set 4
+remove 0 and set 4
+LRU, limit=4-> [2][1][3][4]
+
+"""
+""" LRU Cache
+
+"""
+
+
+
 class LRUCache:
     """
     Our LRUCache class keeps track of the max number of nodes it
@@ -7,7 +38,11 @@ class LRUCache:
     to every node stored in the cache.
     """
     def __init__(self, limit=10):
-        pass
+        self.limit = limit
+        self.size = 0
+        self.order = DoublyLinkedList()
+        self.storage = dict()
+
 
     """
     Retrieves the value associated with the given key. Also
@@ -17,7 +52,13 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        pass
+        if key in self.storage:
+            node = self.storage[key]
+            self.order.move_to_end(node)
+            return node.value[1]
+        else:
+            return None
+
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -30,4 +71,34 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        pass
+        if key in self.storage:
+            node = self.storage[key]
+            node.value = (key, value)
+            self.order.move_to_end(node)
+            return
+
+
+        if self.size == self.limit:
+            del self.storage[self.order.remove_from_head()[0]]
+            self.size -= 1
+
+        self.order.add_to_tail((key, value))
+        self.storage[key] = self.order.tail
+        self.size += 1
+
+
+
+if __name__ == "__main__":
+    lru = LRUCache(limit=3)
+    # 
+    # lru.set('item1', 'a')
+    # lru.set('item2', 'b')
+    # lru.set('item3', 'c')
+    #
+    # x = lru.get('item11')
+    # print(x)
+    # print(lru.storage)
+    # lru.set('item2', 'z')
+    #
+    # print(lru.storage)
+    #

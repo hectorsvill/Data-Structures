@@ -3,17 +3,60 @@ sys.path.append('../doubly_linked_list')
 from doubly_linked_list import DoublyLinkedList
 
 
+
+""" 
+back                    front
+Enqueue [0][1][2][3] Dequeue
+
+"""
+
 class Queue:
     def __init__(self):
         self.size = 0
         # Why is our DLL a good choice to store our elements?
-        # self.storage = ?
+        # use dll because it allowes for asy filo
+        self.storage = DoublyLinkedList()
 
+    """Add item to the end of the queue
+    """
     def enqueue(self, value):
-        pass
+        # add node to the back
+        self.storage.add_to_head(value)
+        # node added
+        self.size += 1
 
     def dequeue(self):
-        pass
+        
+        # check of tail exist
+
+        if self.storage.tail != None:
+            # Get node value and return 
+            value = self.storage.remove_from_tail()
+            self.size -= 1
+            return value
+        else:
+            return None
 
     def len(self):
-        pass
+        return self.size
+
+    """ iterate through list and print """
+    def print_queue(self):
+        head = self.storage.head
+        print(f"size: {self.size}")
+        while head:
+            print(head.value, end= ", ")
+            #set curremt node to next node
+            head = head.next
+        print("")
+
+if __name__ == "__main__":
+    q = Queue()
+    q.dequeue()
+    print(q.len())
+    # q.enqueue(1)
+    # q.enqueue(2)
+
+    # q.print_queue()
+    # q.dequeue()
+    # q.print_queue()
