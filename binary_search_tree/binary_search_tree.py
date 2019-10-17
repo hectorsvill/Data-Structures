@@ -93,7 +93,17 @@ class BinarySearchTree:
 
         while q.len():
             node = q.dequeue()
-            print(node.value, end="")
+            print(node.value, end=" ")
+            print("")
+            left = node.left
+            right = node.right
+            if left:
+                q.enqueue(left)
+                # print(left.value)
+            if right:
+                q.enqueue(right)
+                # print(right.value)
+
 
         print("")
 
